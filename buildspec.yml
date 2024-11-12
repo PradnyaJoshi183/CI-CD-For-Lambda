@@ -18,7 +18,7 @@ phases:
     commands:
       - echo "Deploying the Lambda function"
       - aws lambda update-function-code \
-          --CICD-Test-Function-1 YourLambdaFunctionName \
+          ----function-name CICD-Test-Function-1 \
           --zip-file fileb://function1.zip
 
 artifacts:
