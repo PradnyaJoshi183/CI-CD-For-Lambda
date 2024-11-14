@@ -3,10 +3,9 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      python: 3.9  # Ensure Python version is appropriate for your project
+      python: 3.9  # Adjust the Python version if necessary
     commands:
       - echo "Installing AWS CLI"
-      - pip install --upgrade awscli
   pre_build:
     commands:
       - echo "Preparing the environment"
@@ -14,15 +13,15 @@ phases:
   build:
     commands:
       - echo "Zipping the Lambda function code"
-      - zip -r function1.zip lambda_function.py  # Ensure this matches your file structure
+      - zip function.zip lambda_function.py
   post_build:
     commands:
       - echo "Deploying the Lambda function"
       - aws lambda update-function-code \
-          --function-name CICD-Test-Function-1 \  # Corrected the syntax (removed extra hyphens)
+          ----function-name CICD-Test-Function-1 \
           --zip-file fileb://function1.zip
 
 artifacts:
-  files:
-    - function1.zip  # Include the zipped Lambda function in artifacts
-  discard-paths: yes  # To flatten the directory structure
+  type: zip
+  paths:
+    - '*'
